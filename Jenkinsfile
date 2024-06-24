@@ -38,7 +38,7 @@ pipeline {
         stage("Test") {
             steps {
                 script {
-                    def testResult = sh(script: "docker image build -t jakubd255/react-tetris-tests -f DockerfileTest . && docker run --name tests jakubd255/react-tetris-tests", returnStatus: true)
+                    def testResult = sh(script: "docker image build -t jakubd255/react-tetris-tests -f DockerfileTest . && docker run jakubd255/react-tetris-tests", returnStatus: true)
                     
                     if(testResult == 0) {
                         currentBuild.result = "SUCCESS"
@@ -64,7 +64,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    def dockerRun = "docker run --name app -d -p 5173:5173 jakubd255/react-tetris"
+                    def dockerRun = "docker run -d -p 5173:5173 jakubd255/react-tetris"
                     def dockerRunOutput = sh(script: dockerRun, returnStdout: true).trim()
 
                     if(dockerRunOutput) {
