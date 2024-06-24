@@ -1,0 +1,19 @@
+version: "3.8"
+
+
+services:
+  game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jakubd255/react-tetris
+    ports:
+      - "5173:5173"
+  
+  tests:
+    build:
+      context: .
+      dockerfile: DockerfileTest
+    image: jakubd255/react-tetris-tests
+    depends_on:
+    - game

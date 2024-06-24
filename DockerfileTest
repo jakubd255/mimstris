@@ -1,0 +1,3 @@
+FROM jakubd255/react-tetris
+
+CMD ["npm", "test"]
